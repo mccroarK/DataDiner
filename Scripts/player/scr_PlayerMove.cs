@@ -24,6 +24,7 @@ public partial class scr_Player : MonoBehaviour
     // Start is called before the first frame update
     void StartMove()
     {
+        // Get player CharacterController
         _plaController = GetComponent<CharacterController>();
     }
 
@@ -38,7 +39,7 @@ public partial class scr_Player : MonoBehaviour
         CalcMoveVector();
 
         // Move controller using Move Input, Current Player Speed, and Time
-        _plaController.Move(_plaMoveVector * Time.deltaTime);
+        _plaController.Move(_plaMoveVector * Time.deltaTime);   // Move outside script for menu?
     }
 
     void CalcMoveVector()

@@ -6,13 +6,13 @@ public partial class scr_Player : MonoBehaviour
 {
     enum MoveState
     {
-        STILL,
-        WALKING,
-        RUNNING
+        STILL,                  // Player Standing Still
+        WALKING,                // Player Walking
+        RUNNING                 // Player Running
     }
 
     #region Properties
-    MoveState _plaMoveState;
+    MoveState _plaMoveState;    // Player move state
     #endregion
 
     // Start is called before the first frame update
