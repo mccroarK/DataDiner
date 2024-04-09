@@ -9,6 +9,7 @@ public partial class scr_Player : MonoBehaviour
     CharacterController _plaController;
 
     // Player state speeds
+    [Header("Movement Settings")]
     [SerializeField] float _plaWalkSpeed = 2.5f;    // Walk speed
     [SerializeField] float _plaRunSpeed = 7.5f;     // Run speed
     [SerializeField] float _plaSpeedAccel = 1;      // Speed acceleration
@@ -31,15 +32,12 @@ public partial class scr_Player : MonoBehaviour
     // Update is called once per frame
     void UpdateMove()
     {
-        // Code Modified from Unity Documentation (https://docs.unity3d.com/ScriptReference/CharacterController.Move.html)
+        // FPS Movement code modified from Unity Documentation (https://docs.unity3d.com/ScriptReference/CharacterController.Move.html)
         // AND
         // Brackey's FPS Controller (https://youtu.be/_QajrabyTJc?si=NQ0-tVtGhx2XAab8)
 
         // Calculate move speed (DO NOT MODIFY MOVE INPUT)
         CalcMoveVector();
-
-        // Move controller using Move Input, Current Player Speed, and Time
-        _plaController.Move(_plaMoveVector * Time.deltaTime);   // Move outside script for menu?
     }
 
     void CalcMoveVector()

@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public partial class scr_Player : MonoBehaviour
 {
     #region Properties
-    Camera _plaCamera;                                  // Player Camera
+    [SerializeField] Transform _plaRotationCamera;      // Player Rotation Camera
 
-    [Header("Mouse Options")]
+    [Header("Mouse Settings")]
     [SerializeField] float _plaMouseX = 1f;             // X Look Mouse Sensitivity
     [SerializeField] float _plaMouseY = 1f;             // Y Look Mouse Sensitivity
 
@@ -16,14 +17,13 @@ public partial class scr_Player : MonoBehaviour
     bool _plaInvertX = false;                           // Invert X Look Boolean
     bool _plaInvertY = true;                            // Invert Y Look Boolean
 
-    float _plaYLook;
+    float _plaYLook;                                    // Player Look Y Position
     #endregion
 
     // Start is called before the first frame update
     void StartLook()
     {
-        // Get player camera
-        _plaCamera = GetComponentInChildren<Camera>();
+        
     }
 
     // Update is called once per frame
@@ -34,6 +34,8 @@ public partial class scr_Player : MonoBehaviour
 
         // Get player look on the Y axis
         GetLookY();
+
+        // Alter camera rotation
     }
 
     void GetLookX()
@@ -59,6 +61,6 @@ public partial class scr_Player : MonoBehaviour
         _plaYLook = Mathf.Clamp(_plaYLook, -_plaCameraClamp, _plaCameraClamp);
 
         // Turn camera up/down
-        _plaCamera.transform.localRotation = Quaternion.Euler(_plaYLook, 0f, 0f);
+        _plaRotationCamera.transform.localRotation = Quaternion.Euler(_plaYLook, 0f, 0f);
     }
 }

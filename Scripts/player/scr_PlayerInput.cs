@@ -28,6 +28,7 @@ public partial class scr_Player : MonoBehaviour
         _plaInput.actions["Move"].performed += ctx => GetMoveInput(ctx);
         _plaInput.actions["Look"].performed += ctx => GetLookInput(ctx);
         _plaInput.actions["Use"].performed += ctx => GetUseInput(ctx);
+        _plaInput.actions["Menu"].performed += ctx => GetMenuInput(ctx);
 
         _plaInput.actions["Run"].started += ctx => StartRun(ctx);
         _plaInput.actions["Run"].canceled += ctx => StopRun(ctx);
@@ -37,7 +38,7 @@ public partial class scr_Player : MonoBehaviour
     // Update is called once per frame
     void UpdateInput()
     {
-        Debug.Log(_plaMoveInput);
+        //Debug.Log(_plaMoveInput);
     }
 
     void GetMoveInput(InputAction.CallbackContext ctx)
@@ -55,7 +56,24 @@ public partial class scr_Player : MonoBehaviour
     void GetUseInput(InputAction.CallbackContext ctx)
     {
         //
-        Debug.Log("Using");
+        //Debug.Log("Using");
+    }
+
+    void GetMenuInput(InputAction.CallbackContext ctx)
+    {
+        // If menu is closed
+        if (!_plaMenuOpen)
+        {
+            // Open the menu
+            OpenMenu();
+        }
+
+        // If menu is open
+        else
+        {
+            // Close the menu
+            CloseMenu();
+        }
     }
 
     void StartRun(InputAction.CallbackContext ctx)

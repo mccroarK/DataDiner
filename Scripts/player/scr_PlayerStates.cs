@@ -63,16 +63,19 @@ public partial class scr_Player : MonoBehaviour
             // Player is walking
             case MoveState.WALKING:
                 _plaSpeed = _plaWalkSpeed;
+                _plaStepTime = _plaWalkStepTime;
                 break;
 
             // Player is running
             case MoveState.RUNNING:
                 _plaSpeed = _plaRunSpeed;
+                _plaStepTime = _plaRunStepTime;
                 break;
 
             // Player is still
             default:
                 _plaSpeed = 0;
+                _plaStepTime = _plaWalkStepTime;
                 break;
         }
     }
