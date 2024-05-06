@@ -1,10 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using TMPro;
-using System;
 
 [RequireComponent(typeof(AudioSource))]
 public class scr_Customer : MonoBehaviour, IUsable
