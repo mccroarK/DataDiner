@@ -13,12 +13,15 @@ public class scr_SpawnButton : MonoBehaviour, IUsable
         _buttonAudioSource = GetComponent<AudioSource>();
     }
 
-    public void OnUse(scr_Player user)
+    public bool OnUse(scr_Player user)
     {
         // Play a sound
         _buttonAudioSource.Play();
 
         // Spawn entities using game manager
         GameManager.Instance.SpawnAll();
+
+        // Return
+        return true;
     }
 }

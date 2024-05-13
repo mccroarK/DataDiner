@@ -12,6 +12,7 @@ public partial class scr_Player : MonoBehaviour
         StartStates();
         StartMove();
         StartLook();
+        StartUse();
 
         // Extra
         StartSlide();
@@ -27,6 +28,7 @@ public partial class scr_Player : MonoBehaviour
         UpdateStates();
         UpdateMove();
         UpdateLook();
+        UpdateUse();
 
         // Extra
         UpdateSlide();

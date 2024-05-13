@@ -4,29 +4,38 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    // Singleton code from Chase Mitchell (https://sneakydaggergames.medium.com/creating-manager-classes-in-unity-a77cf7edcba5)
+
     #region Properties
     // Variables
-    static GameManager instance;
+    static GameManager _gameInstance;
     [SerializeField] Equation[] _gmEquations;   // Equations
-    [SerializeField] Spawnpoint[] _spawnPoints; // Spawn Points
+    [SerializeField] Spawn[] _gameSpawns;       // Game Spawns
 
     // Properties
     public static GameManager Instance
     {
         get
         {
-            // If no instance of game manager
-            if (instance == null)
+            // If there is no instance of a game manager
+            if (_gameInstance == null)
             {
-                // Find this game manager
-                instance = FindObjectOfType<GameManager>();
+                // Create an instance of the game manager
+                _gameInstance = new GameManager();
             }
 
             // Return game manager instance
-            return instance;
+            return _gameInstance;
         }
     }
     #endregion
+
+    // Awake is called before Start
+    void Awake()
+    {
+        // Set the game manager reference to this
+        _gameInstance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -35,57 +44,19 @@ public class GameManager : MonoBehaviour
         SpawnAll();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    // Activate all spawn points
     public void SpawnAll()
     {
         // Loop through every spawn point
-        foreach(Spawnpoint spawnpoint in _spawnPoints)
+        foreach(Spawn spawn in _gameSpawns)
         {
             // Spawn entity
-            Spawn(spawnpoint);
+            spawn.Activate();
         }
     }
 
-    void Spawn(Spawnpoint spawnpoint)
+    public Equation GetEquation()
     {
-        // If spawn is not full
-        if (!spawnpoint.Full)
-        {
-            // Spawn entity at spawn location
-            GameObject _object = Instantiate(spawnpoint.Entity, spawnpoint.Position, Quaternion.identity);
-
-            // If object is customer
-            if (_object.TryGetComponent(out scr_Customer customer))
-            {
-                // Set customer spawn
-                customer.Spawn = spawnpoint;
-
-                // Set spawnpoint to full
-                customer.Spawn.Full = true;
-
-                // Set customer equation
-                customer.Equation = _gmEquations[Random.Range(0, _gmEquations.Length - 1)];
-            }
-
-            // Else if object is item
-            else if (_object.TryGetComponent(out scr_Item item))
-            {
-                // Set item spawn
-                item.Spawn = spawnpoint;
-
-                // Set spawnpoint to full
-                item.Spawn.Full = true;
-            }
-        }
-    }
-
-    public void Quit()
-    {
-        Application.Quit();
+        return _gmEquations[Random.Range(0, _gmEquations.Length - 1)];
     }
 }

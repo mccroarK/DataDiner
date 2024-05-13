@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IUsable
 {
-    public void OnUse(scr_Player user);    // On used
+    public bool OnUse(scr_Player user);    // Run on use by player
 }

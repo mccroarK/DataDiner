@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
@@ -14,12 +15,15 @@ public class scr_QuitButton : MonoBehaviour, IUsable
         _buttonAudioSource = GetComponent<AudioSource>();
     }
 
-    public void OnUse(scr_Player user)
+    public bool OnUse(scr_Player user)
     {
         // Play a sound
         _buttonAudioSource.Play();
 
         // Quit the game
         Application.Quit();
+
+        // Return
+        return true;
     }
 }
